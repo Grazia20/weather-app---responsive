@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+
+    <!-- link file css-->
+    <link rel="stylesheet" href="style.css">
+
+      <!--link font awesome-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+    
+    <div class="card">
+
+        <!--search section-->
+        <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <button> <i class="fas fa-search"></i></button>
+        </div>
+        
+        <!--error-->
+        <div class="error">
+            <p>Invalid city name</p>
+        </div>
+
+        <!--weather section-->
+        <div class="weather">
+            <i class="fa-solid fa-cloud-rain"></i>
+            <h1 class="temperature"></h1>
+            <h2 class="city"></h2>
+            <div class="deatils">
+
+                <!--humidity-->
+                <div class="col">
+                    <i class="fa-solid fa-droplet"></i>
+                    <div class="humidity">
+                        <p>Humidity</p>
+                        <p class="humidity-per"></p>
+                    </div>   
+                </div>
+                
+                <!--wind-->
+                <div class="col">
+                    <i class="fa-solid fa-wind"></i>
+                    <div class="wind">
+                        <p>Wind Speed</p>
+                        <p class="wind-speed"></p>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API from Open Weather App-->
+    <script>
+
+        /* api key and url*/
+        const apiKey = "";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+        /* aquire  user input */
+        const searchBox = document.querySelector( ".search input" );
+        const searchBtn = document.querySelector( ".search button" );
+
+        /* const for icon's change*/
+        const weatherIcon = document.querySelector(".weather i");
+
+        // function for check the weather
+        async function checkWeather(city){
+
+                const response = await fetch(apiUrl + city + '&appid=' + apiKey);  //fetch
+                
+                /* check if the city name is correct*/
+
+                if(response.status == 404){
+                    
+                    document.querySelector( '.error' ).style.display ="block";
+                
+                }else{
+
+                    var data = await response.json();   //convert to json format
+
+                    console.log(data);
+
+                    document.querySelector(('.city')).innerHTML = data.name;
+                    document.querySelector(('.temperature')).innerHTML = Math.round(data.main.temp)  + "°C";
+                    document.querySelector(('.humidity-per')).innerHTML = data.main.humidity + "%";
+                    document.querySelector(('.wind-speed')).innerHTML = data.wind.speed + " Km/h";
+                    
+                    
+                    /* displat the result*/
+                    document.querySelector(" .weather").style.display = "block";
+                    document.querySelector( '.error' ).style.display ="none";
+              
+                    /*change the icons  according to weather conditions*/
+                    if(data.weather[0].main == "Clouds"){
+                        weatherIcon.className = "fa-solid fa-cloud";
+                    } 
+                    else if(data.weather[0].main == "Clear"){
+                        weatherIcon.className = "fa-solid fa-sun";
+                    }  
+                    else if(data.weather[0].main == "Rain"){
+                        weatherIcon.className =  "fa-solid fa-cloud-rain";
+                    }  
+                    else if(data.weather[0].main == "Drizzle"){
+                        weatherIcon.className =  "fa-solid fa-sun-rain";
+                    }  
+                    else if(data.weather[0].main == "Mist"){
+                        weatherIcon.className = "fa-solid fa-smog";
+                    }  
+                    else if(data.weather[0].main == "Snow"){
+                        weatherIcon.className = "fa-solid fa-snowflake";
+                    } 
+                }
+                   
+        }
+
+        /* acquire the city name from  user and call the function */
+        searchBtn.addEventListener("click", ()=>{
+            checkWeather(searchBox.value);
+        })
+
+    </script>
+
+
+</body>
+</html>

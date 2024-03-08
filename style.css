@@ -1,0 +1,146 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+}
+
+/* Card section */
+.card {
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #e5fe00, #c03e3e);
+    color: #fff;
+    margin: 100px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.card .search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card .search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+}
+
+.card .search button {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+}
+
+.error {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Weather section */
+.weather {
+    display: none;
+}
+
+.weather i {
+    font-size: 70px;
+    margin-top: 30px;
+}
+
+.weather h1 {
+    font-size: 80px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.weather h2 {
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.weather .deatils {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 30px;
+}
+
+.weather .deatils .col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.weather .deatils .col i {
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.weather .deatils .col .humidity,
+.weather .deatils .col .wind {
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+
+    .card .search {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card .search input {
+        margin-bottom: 16px;
+    }
+
+    .card .search button {
+        margin-right: 0;
+    }
+
+    .weather .deatils {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weather .deatils .col {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .weather .deatils .col i {
+        margin-right: 0;
+    }
+
+    .weather .deatils .col .humidity,
+    .weather .deatils .col .wind {
+        margin-top: 10px;
+    }
+}
